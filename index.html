@@ -1,34 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Protected Page</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GUI Walkaround Guides</title>
   <style>
-  html, body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #222222;
-    margin: 0;
-    font-family: sans-serif;
-    height: 100vh;
-    color: #ccc;
-    text-align: center;
-  }
-    #login { max-width: 500px; margin: auto; }
-    #content {
+    html, body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #222222;
+      margin: 0;
+      font-family: sans-serif;
+      height: 100vh;
+    }
+    .phone {
       position: absolute;
       z-index: 1;
       border-radius: 40px;
       overflow: hidden;
-      display: none;
-    }
-    .phone {
-      width: 1200px;
-      height: 554px;
-      border-radius: 40px;
-      overflow: hidden;
-      border: 20px solid #000;
+      border: 20px solid rgba(0, 0, 0, 1);
     }
     .screen {
       border-radius: 20px;
@@ -66,7 +57,6 @@
       box-sizing: border-box;
       -moz-box-sizing: border-box;
       -webkit-box-sizing: border-box;
-      text-align: left;
     }
 
     .phonestatus {
@@ -114,7 +104,6 @@
       height: 100%;
       margin: 20px auto 0px auto;
       padding: 16px 0;
-      cursor: not-allowed;
     }
 
     .nav img {
@@ -190,14 +179,12 @@
       padding: 16px 0;
       border-top: 1px solid rgba(255, 255, 255, 0.2);
       border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-      cursor: not-allowed;
     }
     .capture img {
       max-width: 80%;
     }
     .height {
       margin: 0 auto;
-      cursor: not-allowed;
     }
     .height img {
       max-width: 80%;
@@ -212,51 +199,79 @@
     .icon {
       max-width: 20px;
     }
-
-    input {
-      background: #000;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 8px 13px;
-      border-radius: 6px;
-      color: #ccc;
-    }
-    button {
-      background: white;
-      border: 0;
-      padding: 8px 13px;
-      border-radius: 6px;
-    }
-    h2 {
-      font-weight: normal;
-    }
   </style>
 </head>
 <body>
 
-<div id="login">
-  <h2>Password Required</h2>
-  <input type="password" id="password" placeholder="Enter password">
-  <button onclick="unlock()">Unlock</button>
+<div class="phone">
+<div class="screen">
+<div class="phonestatus"></div>
+<div class="actualscreen">
+<div class="phonetopbar"><div class="time">9:30</div></div>
+<div class="screen-content">
+<div class="left-content">
+<div class="nav"><img src="nav.png" alt="nav"></div>
+</div>
+<div class="center-content">
+<video class="walkaround-vid" loop muted autoplay preload="auto" id="video1">
+<source src="w.mp4" type="video/mp4" />
+</video>
+<div class="guidesbtn"><img class="icon" src="eye.svg" alt="eye">Show guides</div>
+</div>
+<div class="right-content">
+<div class="walkaround-guide">
+<video class="walkaround-guide-anim" loop muted autoplay preload="auto" id="video2">
+<source src="walkaround-guide-anim.mp4" type="video/mp4" />
+</video>
+</div>
+<div class="capture"><img src="capture.png" alt="Capture"></div>
+<div class="height"><img src="height.png" alt="height"></div>
+</div>
+</div>
+</div>
+<div class="phonetoolbar"><img src="toolbar.png" alt="toolbar"></div>
+</div>
 </div>
 
-<div id="content"></div>
-
 <script>
-  const encodedContent = "PGRpdiBjbGFzcz0icGhvbmUiPgo8ZGl2IGNsYXNzPSJzY3JlZW4iPgo8ZGl2IGNsYXNzPSJwaG9uZXN0YXR1cyI+PC9kaXY+CjxkaXYgY2xhc3M9ImFjdHVhbHNjcmVlbiI+CjxkaXYgY2xhc3M9InBob25ldG9wYmFyIj48ZGl2IGNsYXNzPSJ0aW1lIj45OjMwPC9kaXY+PC9kaXY+CjxkaXYgY2xhc3M9InNjcmVlbi1jb250ZW50Ij4KPGRpdiBjbGFzcz0ibGVmdC1jb250ZW50Ij4KPGRpdiBjbGFzcz0ibmF2Ij48aW1nIHNyYz0ibmF2LnBuZyIgYWx0PSJuYXYiPjwvZGl2Pgo8L2Rpdj4KPGRpdiBjbGFzcz0iY2VudGVyLWNvbnRlbnQiPgo8dmlkZW8gY2xhc3M9IndhbGthcm91bmQtdmlkIiBsb29wIG11dGVkIGF1dG9wbGF5IHByZWxvYWQ9ImF1dG8iIGlkPSJ2aWRlbzEiPgo8c291cmNlIHNyYz0idy5tcDQiIHR5cGU9InZpZGVvL21wNCIgLz4KPC92aWRlbz4KPGRpdiBjbGFzcz0iZ3VpZGVzYnRuIj48aW1nIGNsYXNzPSJpY29uIiBzcmM9ImV5ZS5zdmciIGFsdD0iZXllIj5TaG93IGd1aWRlczwvZGl2Pgo8L2Rpdj4KPGRpdiBjbGFzcz0icmlnaHQtY29udGVudCI+CjxkaXYgY2xhc3M9IndhbGthcm91bmQtZ3VpZGUiPgo8dmlkZW8gY2xhc3M9IndhbGthcm91bmQtZ3VpZGUtYW5pbSIgbG9vcCBtdXRlZCBhdXRvcGxheSBwcmVsb2FkPSJhdXRvIiBpZD0idmlkZW8yIj4KPHNvdXJjZSBzcmM9IndhbGthcm91bmQtZ3VpZGUtYW5pbS5tcDQiIHR5cGU9InZpZGVvL21wNCIgLz4KPC92aWRlbz4KPC9kaXY+CjxkaXYgY2xhc3M9ImNhcHR1cmUiPjxpbWcgc3JjPSJjYXB0dXJlLnBuZyIgYWx0PSJDYXB0dXJlIj48L2Rpdj4KPGRpdiBjbGFzcz0iaGVpZ2h0Ij48aW1nIHNyYz0iaGVpZ2h0LnBuZyIgYWx0PSJoZWlnaHQiPjwvZGl2Pgo8L2Rpdj4KPC9kaXY+CjwvZGl2Pgo8ZGl2IGNsYXNzPSJwaG9uZXRvb2xiYXIiPjxpbWcgc3JjPSJ0b29sYmFyLnBuZyIgYWx0PSJ0b29sYmFyIj48L2Rpdj4KPC9kaXY+CjwvZGl2PgoKPHNjcmlwdD4KICBjb25zdCB2aWRlbzEgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgndmlkZW8xJyk7CiAgY29uc3QgdmlkZW8yID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3ZpZGVvMicpOwogIGNvbnN0IGZsZXhibG9ja3R3byA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdmbGV4YmxvY2t0d28nKTsKCiAgZnVuY3Rpb24gd2FpdFVudGlsQ2FuUGxheSh2aWRlbykgewogICAgcmV0dXJuIG5ldyBQcm9taXNlKHJlc29sdmUgPT4gewogICAgICBpZiAodmlkZW8ucmVhZHlTdGF0ZSA+PSAzKSByZXNvbHZlKCk7CiAgICAgIGVsc2UgdmlkZW8ub25jYW5wbGF5dGhyb3VnaCA9IHJlc29sdmU7CiAgICB9KTsKICB9CgogIGFzeW5jIGZ1bmN0aW9uIHN5bmNQbGF5TG9vcCgpIHsKICAgIGF3YWl0IFByb21pc2UuYWxsKFt3YWl0VW50aWxDYW5QbGF5KHZpZGVvMSksIHdhaXRVbnRpbENhblBsYXkodmlkZW8yKV0pOwoKICAgIGNvbnN0IGR1cmF0aW9uID0gdmlkZW8xLmR1cmF0aW9uOwoKICAgIGZ1bmN0aW9uIHN5bmNQbGF5KCkgewogICAgICB2aWRlbzEuY3VycmVudFRpbWUgPSAwOwogICAgICB2aWRlbzIuY3VycmVudFRpbWUgPSAwOwoKICAgICAgdmlkZW8xLnBsYXkoKTsKICAgICAgdmlkZW8yLnBsYXkoKTsKCiAgICAgIHNldFRpbWVvdXQoc3luY1BsYXksIGR1cmF0aW9uICogMTAwMCk7CiAgICB9CgogICAgc3luY1BsYXkoKTsKICB9CgogIGZ1bmN0aW9uIHRvZ2dsZUZsZXhCbG9ja1R3bygpIHsKICAgIGlmIChmbGV4YmxvY2t0d28uc3R5bGUuZGlzcGxheSA9PT0gJ25vbmUnIHx8IGdldENvbXB1dGVkU3R5bGUoZmxleGJsb2NrdHdvKS5kaXNwbGF5ID09PSAnbm9uZScpIHsKICAgICAgZmxleGJsb2NrdHdvLnN0eWxlLmRpc3BsYXkgPSAnZmxleCc7CiAgICB9IGVsc2UgewogICAgICBmbGV4YmxvY2t0d28uc3R5bGUuZGlzcGxheSA9ICdub25lJzsKICAgIH0KICB9CgogIHdpbmRvdy5hZGRFdmVudExpc3RlbmVyKCdsb2FkJywgc3luY1BsYXlMb29wKTsKPC9zY3JpcHQ+"; // base64 HTML
-  const cP = "x";
+  const video1 = document.getElementById('video1');
+  const video2 = document.getElementById('video2');
+  const flexblocktwo = document.getElementById('flexblocktwo');
 
-  function unlock() {
-    const input = document.getElementById("password").value;
-    if (input === cP) {
-      const decoded = atob(encodedContent);
-      document.getElementById("content").innerHTML = decoded;
-      document.getElementById("login").style.display = "none";
-      document.getElementById("content").style.display = "block";
+  function waitUntilCanPlay(video) {
+    return new Promise(resolve => {
+      if (video.readyState >= 3) resolve();
+      else video.oncanplaythrough = resolve;
+    });
+  }
+
+  async function syncPlayLoop() {
+    await Promise.all([waitUntilCanPlay(video1), waitUntilCanPlay(video2)]);
+
+    const duration = video1.duration;
+
+    function syncPlay() {
+      video1.currentTime = 0;
+      video2.currentTime = 0;
+
+      video1.play();
+      video2.play();
+
+      setTimeout(syncPlay, duration * 1000);
+    }
+
+    syncPlay();
+  }
+
+  function toggleFlexBlockTwo() {
+    if (flexblocktwo.style.display === 'none' || getComputedStyle(flexblocktwo).display === 'none') {
+      flexblocktwo.style.display = 'flex';
     } else {
-      alert("Wrong password.");
+      flexblocktwo.style.display = 'none';
     }
   }
-</script>
 
+  window.addEventListener('load', syncPlayLoop);
+</script>
 </body>
 </html>
