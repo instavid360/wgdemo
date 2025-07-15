@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Protected Page</title>
+  <style>
+  html, body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #222222;
+    margin: 0;
+    font-family: sans-serif;
+    height: 100vh;
+    color: #ccc;
+    text-align: center;
+  }
+    #login { max-width: 500px; margin: auto; }
+    #content {
+      position: absolute;
+      z-index: 1;
+      border-radius: 40px;
+      overflow: hidden;
+      display: none;
+    }
+    .phone {
+      width: 1200px;
+      height: 554px;
+      border-radius: 40px;
+      overflow: hidden;
+      border: 20px solid #000;
+    }
+    .screen {
+      border-radius: 20px;
+      overflow: hidden;
+      width: 1200px;
+      height: 554px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0px;
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .actualscreen {
+      width: 100%;
+      height: calc(100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0px;
+      background: green;
+    }
+
+    .phonetopbar {
+      width: 100%;
+      height: 30px;
+      background: #323436;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-top: 0;
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      text-align: left;
+    }
+
+    .phonestatus {
+      width: 50px;
+      height: 100%;
+      background: black;
+    }
+    .phonetoolbar {
+      width: 50px;
+      height: 100%;
+      background: black;
+      display: flex;
+      align-content: center;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .phonetoolbar img { margin: 0 auto; height: 280px;}
+
+    .screen-content {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 0px;
+      background: #17FF12;
+      height: calc(100% - 30px);
+      width: 100%;
+      position: relative;
+    }
+
+    .left-content {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 0px;
+      background: #323436;
+      height: 100%;
+      width: 320px;
+      border-left: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav {
+      height: 100%;
+      margin: 20px auto 0px auto;
+      padding: 16px 0;
+    }
+
+    .nav img {
+      height: 100%;
+    }
+
+    .center-content {
+      height: calc(100% - 10px);
+      width: 100%;
+      /* background: blue; */
+      display: flex;
+      align-items: center;
+      align-content: center;
+      border-left: 1px solid rgba(255, 255, 255, 0.2);
+      border-right: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 5px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .walkaround-vid {
+      width: 100%;
+      position: relative;
+      z-index: 0;
+    }
+
+    .guidesbtn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 2;
+      color: #111;
+      background: white;
+      padding: 10px 13px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: bold;
+      border-radius: 60px;
+      cursor: not-allowed;
+      display: flex;
+      align-items: center;
+      align-content: center;
+      justify-content: center;
+      flex-direction: row;
+      grid-gap: 8px;
+    }
+
+    .right-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      align-content: center;
+      justify-content: center;
+      gap: 0px;
+      background: #323436;
+      height: 100%;
+      width: 320px;
+      text-align: center;
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .walkaround-guide {
+      padding: 0 10px;
+    }
+
+    .walkaround-guide-anim {
+      height: 100%;
+      width: 100%;
+    }
+
+    .capture {
+      margin: 13px auto 16px auto;
+      padding: 16px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .capture img {
+      max-width: 80%;
+    }
+    .height {
+      margin: 0 auto;
+    }
+    .height img {
+      max-width: 80%;
+    }
+
+    .time {
+      margin-top: 7px!important;
+      margin-left: 13px!important;
+      color: #ccc;
+      font-size: 12px;
+    }
+    .icon {
+      max-width: 20px;
+    }
+
+    input {
+      background: #000;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 8px 13px;
+      border-radius: 6px;
+      color: #ccc;
+    }
+    button {
+      background: white;
+      border: 0;
+      padding: 8px 13px;
+      border-radius: 6px;
+    }
+    h2 {
+      font-weight: normal;
+    }
+  </style>
+</head>
+<body>
+
+<div id="login">
+  <h2>Password Required</h2>
+  <input type="password" id="password" placeholder="Enter password">
+  <button onclick="unlock()">Unlock</button>
+</div>
+
+<div id="content"></div>
+
+<script>
+  const encodedContent = "PGRpdiBjbGFzcz0icGhvbmUiPgo8ZGl2IGNsYXNzPSJzY3JlZW4iPgo8ZGl2IGNsYXNzPSJwaG9uZXN0YXR1cyI+PC9kaXY+CjxkaXYgY2xhc3M9ImFjdHVhbHNjcmVlbiI+CjxkaXYgY2xhc3M9InBob25ldG9wYmFyIj48ZGl2IGNsYXNzPSJ0aW1lIj45OjMwPC9kaXY+PC9kaXY+CjxkaXYgY2xhc3M9InNjcmVlbi1jb250ZW50Ij4KPGRpdiBjbGFzcz0ibGVmdC1jb250ZW50Ij4KPGRpdiBjbGFzcz0ibmF2Ij48aW1nIHNyYz0ibmF2LnBuZyIgYWx0PSJuYXYiPjwvZGl2Pgo8L2Rpdj4KPGRpdiBjbGFzcz0iY2VudGVyLWNvbnRlbnQiPgo8dmlkZW8gY2xhc3M9IndhbGthcm91bmQtdmlkIiBsb29wIG11dGVkIGF1dG9wbGF5IHByZWxvYWQ9ImF1dG8iIGlkPSJ2aWRlbzEiPgo8c291cmNlIHNyYz0iV2Fsa2Fyb3VuZC1hY3R1YWwtbmV3Lm1wNCIgdHlwZT0idmlkZW8vbXA0IiAvPgo8L3ZpZGVvPgo8ZGl2IGNsYXNzPSJndWlkZXNidG4iPjxpbWcgY2xhc3M9Imljb24iIHNyYz0iZXllLnN2ZyIgYWx0PSJleWUiPlNob3cgZ3VpZGVzPC9kaXY+CjwvZGl2Pgo8ZGl2IGNsYXNzPSJyaWdodC1jb250ZW50Ij4KPGRpdiBjbGFzcz0id2Fsa2Fyb3VuZC1ndWlkZSI+Cjx2aWRlbyBjbGFzcz0id2Fsa2Fyb3VuZC1ndWlkZS1hbmltIiBsb29wIG11dGVkIGF1dG9wbGF5IHByZWxvYWQ9ImF1dG8iIGlkPSJ2aWRlbzIiPgo8c291cmNlIHNyYz0id2Fsa2Fyb3VuZC1ndWlkZS1hbmltLm1wNCIgdHlwZT0idmlkZW8vbXA0IiAvPgo8L3ZpZGVvPgo8L2Rpdj4KPGRpdiBjbGFzcz0iY2FwdHVyZSI+PGltZyBzcmM9ImNhcHR1cmUucG5nIiBhbHQ9IkNhcHR1cmUiPjwvZGl2Pgo8ZGl2IGNsYXNzPSJoZWlnaHQiPjxpbWcgc3JjPSJoZWlnaHQucG5nIiBhbHQ9ImhlaWdodCI+PC9kaXY+CjwvZGl2Pgo8L2Rpdj4KPC9kaXY+CjxkaXYgY2xhc3M9InBob25ldG9vbGJhciI+PGltZyBzcmM9InRvb2xiYXIucG5nIiBhbHQ9InRvb2xiYXIiPjwvZGl2Pgo8L2Rpdj4KPC9kaXY+"; // base64 HTML
+  const cP = "x";
+
+  function unlock() {
+    const input = document.getElementById("password").value;
+    if (input === cP) {
+      const decoded = atob(encodedContent);
+      document.getElementById("content").innerHTML = decoded;
+      document.getElementById("login").style.display = "none";
+      document.getElementById("content").style.display = "block";
+    } else {
+      alert("Wrong password.");
+    }
+  }
+</script>
+
+<script>
+  const video1 = document.getElementById('video1');
+  const video2 = document.getElementById('video2');
+  const flexblocktwo = document.getElementById('flexblocktwo');
+
+  function waitUntilCanPlay(video) {
+    return new Promise(resolve => {
+      if (video.readyState >= 3) resolve();
+      else video.oncanplaythrough = resolve;
+    });
+  }
+
+  async function syncPlayLoop() {
+    await Promise.all([waitUntilCanPlay(video1), waitUntilCanPlay(video2)]);
+
+    const duration = video1.duration;
+
+    function syncPlay() {
+      video1.currentTime = 0;
+      video2.currentTime = 0;
+
+      video1.play();
+      video2.play();
+
+      setTimeout(syncPlay, duration * 1000);
+    }
+
+    syncPlay();
+  }
+
+  function toggleFlexBlockTwo() {
+    if (flexblocktwo.style.display === 'none' || getComputedStyle(flexblocktwo).display === 'none') {
+      flexblocktwo.style.display = 'flex';
+    } else {
+      flexblocktwo.style.display = 'none';
+    }
+  }
+
+  window.addEventListener('load', syncPlayLoop);
+</script>
+
+</body>
+</html>
