@@ -196,13 +196,13 @@
 
     .capture {
       margin: 13px auto 16px auto;
-      padding: 16px 0;
+      padding: 10px 0;
       border-top: 1px solid rgba(255, 255, 255, 0.2);
       border-bottom: 1px solid rgba(255, 255, 255, 0.2);
       cursor: not-allowed;
     }
     .capture img {
-      max-width: 80%;
+      max-width: 70%;
     }
     .height {
       margin: 0 auto;
@@ -226,6 +226,18 @@
       height: 20px;
       background: rgba(255, 255, 255, 0.1);
       border-radius: 40px;
+    }
+
+    .detected {
+      color: #FFF;
+      background: rgba(0, 0, 0, 0);
+      padding: 8px 12px;
+      text-align: center;
+      font-size: 10px;
+      font-weight: bold;
+      border-radius: 60px;
+      cursor: not-allowed;
+      border: 1px solid #17FF12;
     }
   </style>
 </head>
@@ -256,6 +268,7 @@
           <source src="walkaround-guide-anim.mp4" type="video/mp4" />
         </video>
       </div>
+      <div class="detected">Vehicle Detected</div>
       <div class="capture"><img src="capture.png" alt="Capture"></div>
       <div class="height"><img src="height.png" alt="height"></div>
     </div>
