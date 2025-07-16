@@ -34,7 +34,7 @@
       box-sizing: border-box;
       -moz-box-sizing: border-box;
       -webkit-box-sizing: border-box;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.02);
     }
 
     .actualscreen {
@@ -63,6 +63,10 @@
       width: 50px;
       height: 100%;
       background: black;
+      display: flex;
+      align-content: center;
+      justify-content: center;
+      align-items: center;
     }
     .phonetoolbar {
       width: 50px;
@@ -96,7 +100,7 @@
       gap: 0px;
       background: #323436;
       height: 100%;
-      width: 320px;
+      width: 328px;
       border-left: 1px solid rgba(255, 255, 255, 0.1);
     }
 
@@ -171,8 +175,23 @@
     }
 
     .walkaround-guide-anim {
+      background: #323436;
       height: 100%;
       width: 100%;
+      transform: scale(1);
+      border-radius: 10px;
+      position: relative;
+      z-index: 10;
+      border: 0px solid rgba(255, 255, 255, 0);
+      transition: all 300ms ease-out;
+      box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px;
+      cursor: zoom-in;
+    }
+
+    .walkaround-guide-anim:hover {
+      transform: scale(1.5);
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 20px;
+      border: 0.1px solid rgba(255, 255, 255, 0.2);
     }
 
     .capture {
@@ -202,44 +221,54 @@
     .icon {
       max-width: 20px;
     }
+    .cameralens {
+      width: 20px;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 40px;
+    }
   </style>
 </head>
 <body>
 
 <div class="phone">
-<div class="screen">
-<div class="phonestatus"></div>
-<div class="actualscreen">
-<div class="phonetopbar"><div class="time">9:30</div></div>
-<div class="screen-content">
-<div class="left-content">
-<div class="nav"><img src="nav.png" alt="nav"></div>
-</div>
-<div class="center-content">
-<video class="walkaround-vid" loop muted autoplay preload="auto" id="video1">
-<source src="w2.mp4" type="video/mp4" />
-</video>
-<div class="guidesbtn"><img class="icon" src="eye.svg" alt="eye">Show guides</div>
-</div>
-<div class="right-content">
-<div class="walkaround-guide">
-<video class="walkaround-guide-anim" loop muted autoplay preload="auto" id="video2">
-<source src="walkaround-guide-anim.mp4" type="video/mp4" />
-</video>
-</div>
-<div class="capture"><img src="capture.png" alt="Capture"></div>
-<div class="height"><img src="height.png" alt="height"></div>
-</div>
-</div>
-</div>
-<div class="phonetoolbar"><img src="toolbar.png" alt="toolbar"></div>
-</div>
+  <div class="screen">
+    <div class="phonestatus"><div class="cameralens"></div></div>
+    <div class="actualscreen">
+      <div class="phonetopbar"><div class="time">9:30</div></div>
+      <div class="screen-content">
+        <div class="left-content">
+          <div class="nav">
+            <video class="walkaround-vid" loop muted autoplay preload="auto" id="video0">
+              <source src="nav-animation.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+        <div class="center-content">
+          <video class="walkaround-vid" loop muted autoplay preload="auto" id="video1">
+            <source src="w2.mp4" type="video/mp4" />
+          </video>
+        <div class="guidesbtn"><img class="icon" src="eye.svg" alt="eye">Show guides</div>
+      </div>
+      <div class="right-content">
+      <div class="walkaround-guide">
+        <video class="walkaround-guide-anim" loop muted autoplay preload="auto" id="video2">
+          <source src="walkaround-guide-anim.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="capture"><img src="capture.png" alt="Capture"></div>
+      <div class="height"><img src="height.png" alt="height"></div>
+    </div>
+    </div>
+    </div>
+    <div class="phonetoolbar"><img src="toolbar.png" alt="toolbar"></div>
+  </div>
 </div>
 
 <script>
+  const video0 = document.getElementById('video0');
   const video1 = document.getElementById('video1');
   const video2 = document.getElementById('video2');
-  const flexblocktwo = document.getElementById('flexblocktwo');
 
   function waitUntilCanPlay(video) {
     return new Promise(resolve => {
@@ -249,14 +278,20 @@
   }
 
   async function syncPlayLoop() {
-    await Promise.all([waitUntilCanPlay(video1), waitUntilCanPlay(video2)]);
+    await Promise.all([
+      waitUntilCanPlay(video0),
+      waitUntilCanPlay(video1),
+      waitUntilCanPlay(video2)
+    ]);
 
-    const duration = video1.duration;
+    const duration = Math.min(video0.duration, video1.duration, video2.duration);
 
     function syncPlay() {
+      video0.currentTime = 0;
       video1.currentTime = 0;
       video2.currentTime = 0;
 
+      video0.play();
       video1.play();
       video2.play();
 
@@ -264,14 +299,6 @@
     }
 
     syncPlay();
-  }
-
-  function toggleFlexBlockTwo() {
-    if (flexblocktwo.style.display === 'none' || getComputedStyle(flexblocktwo).display === 'none') {
-      flexblocktwo.style.display = 'flex';
-    } else {
-      flexblocktwo.style.display = 'none';
-    }
   }
 
   window.addEventListener('load', syncPlayLoop);
